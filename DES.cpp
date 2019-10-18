@@ -273,6 +273,12 @@ void generate_key_round (vector<string> &round_key_biner, vector<string> &round_
 	}
 }
 
+string DES_Decryption(string cipher, vector<string> &round_key_biner, vector<string> &round_key_hex){
+  reverse(round_key_biner.begin(), round_key_biner.end()); 
+	reverse(round_key_hex.begin(), round_key_hex.end()); 
+  return DES(cipher, round_key_biner, round_key_hex); 
+}
+
 int main(){
   table t1;
 	string plain_text, key; 
@@ -297,9 +303,8 @@ int main(){
 	cout<<"\nCipher Text: "<<cipher<<endl; 
 	
 	cout<<"\nDekripsi\n\n"; 
-	reverse(round_key_biner.begin(), round_key_biner.end()); 
-	reverse(round_key_hex.begin(), round_key_hex.end()); 
-	string text= DES(cipher, round_key_biner, round_key_hex); 
+
+	string text= DES_Decryption(cipher, round_key_biner, round_key_hex); 
 	cout<<"\nPlain Text: "<<text<<endl; 
   return 0;
 }
